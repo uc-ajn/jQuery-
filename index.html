@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>JQuery</title>
+
+    <style>
+        #BOX1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+
+        #panel,
+        #flip {
+            padding: 5px;
+            font-size: 18px;
+            text-align: center;
+            background-color: #555;
+            color: white;
+            border: solid 1px #666;
+            border-radius: 3px;
+        }
+
+        #panel {
+            padding: 50px;
+            display: none;
+        }
+        .stopContainer{
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Basic Syntax and JQuery Selectors
+    Selecting by id, class, tagname, attributes, css properties selector like pseudo class selectors -->
+
+    <p class="para" id="paragraph">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, incidunt quod? Voluptates fugiat dignissimos
+        consequuntur nostrum quam, consectetur iure amet velit officiis laboriosam nihil minus quae doloribus cupiditate
+        quia tempora minima nesciunt, ipsam cum totam. Est laudantium praesentium consequatur ipsum?
+    </p>
+    <button id="hide">Hide</button>
+    <button id="show">Show</button>
+    <button class="changeColor">Change Color</button> <br><br>
+
+    Name: <input type="text" name="fullname"><br> <br>
+    Email: <input type="text" name="email">
+
+    <br><br>
+    <div id="p1">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, deserunt! Porro totam quaerat
+        repellendus cum explicabo labore quos error ea hic odio temporibus, corrupti praesentium veritatis quod
+        blanditiis fuga perspiciatis!
+    </div>
+
+    <p id="p2">jQuery is fun!!</p>
+    <button id="slideUpDown">Click me</button> <br>
+
+    <div style="display: flex;">
+        <div id="div1" style="width:80px;height:80px;display:none;background-color:red;"></div><br>
+        <div id="div2" style="width:80px;height:80px;display:none;background-color:green;"></div><br>
+        <div id="div3" style="width:80px;height:80px;display:none;background-color:blue;"></div>
+    </div>
+
+    <br>
+    <button id="fade">fade</button>
+    <button id="fadingIn">fadeIn</button>
+    <button id="fadingOut">fade Out</button>
+
+    <br><br>
+
+    <button id="animtnBtn">Start Animation</button>
+    <br> <br>
+    <div id="animation" style="background:#98bf21;height:100px;width:100px;position: relative;"></div>
+    <br> <br>
+
+    <!-- <div style="display: flex;"> -->
+        <button id="multiBtn">multi Animation</button>
+        <br> <br>
+        <div id="multiAnimation" style="background:blue;height:100px;width:100px;position:relative; "></div>
+        <br> <br>
+        
+        <button id="multiBtn1">multi Animation1</button>
+        <br> <br>
+        <div id="multiAnimation1" style="background:red;height:100px;width:100px;position:relative;"></div>
+        <br> <br>
+
+        <button id="multiBtn2">multi Animation2</button>
+        <br> <br>
+        <div id="multiAnimation2" style="background:yellow;height:100px;width:100px;position:relative;"></div>
+        <br> <br>
+    <!-- </div> -->
+    
+    <div class="stopContainer">
+            <button id="stop">Stop sliding</button>
+            <div id="flip">Click to slide down panel</div>
+            <div id="panel">Hello world!</div>
+    </div>
+    <script>
+        // selector by tagname
+        $('#hide').click((event) => {
+            console.log(event);
+            $('p').hide();
+        });
+
+        // selector by this keyword
+        $("p").click(function () {
+            $(this).hide();
+        });
+
+        //selector by id
+        $('#show').click(() => {
+            $('#paragraph').show();
+        });
+
+        //selector by class
+        $(document).ready(function () {
+            $('.changeColor').click(() => {
+                $('#paragraph').css("color", "red");
+            });
+        });
+
+        //Events
+        //click events
+        $(document).ready(function () {
+            $('.changeColor').click(() => {
+                $('#paragraph').css("color", "red");
+            });
+        });
+
+        //focus and blur
+        $(document).ready(function () {
+            $("input").focus(function () {
+                $(this).css("background-color", "yellow");
+            });
+            $("input").blur(function () {
+                $(this).css("background-color", "green");
+            });
+        });
+
+        //mousedown and mouseup
+        $("#p1").mousedown(function () {
+            $(this).css("background-color", "blue");
+        });
+
+        $("#p2").mouseup(function () {
+            $(this).css("background-color", "purple");
+        });
+
+        $(document).ready(function () {
+            $("#p1").on({
+                mouseenter: function () {
+                    $(this).css("background-color", "lightgray");
+                },
+                mouseleave: function () {
+                    $(this).css("background-color", "lightblue");
+                },
+                click: function () {
+                    $(this).css("background-color", "yellow");
+                }
+            });
+        });
+
+
+        CHAINING: -
+            // JQuery Effects
+            // hide(yes) / show(yes), fadeIn(yes), fadeOut(yes), fadeToggle(yes), slideDown(yes),
+            //     slideUp(yes), slideToggle(yes), animate(yes), stop(yes),
+            // method Chaining
+
+            // hide show
+            $(document).ready(function () {
+                $("#slideUpDown").click(function () {
+                    $("#p2").css("color", "red").hide(2000).show(10);
+                });
+            });
+
+        $(document).ready(function () {
+            $("#slideUpDown").click(function () {
+                $("#p2").toggle("slow");
+            });
+        });
+
+        // slideUp and slideDown
+        $(document).ready(function () {
+            $("#slideUpDown").click(function () {
+                $("#p2").css("color", "red").slideUp(3000).slideDown(3000);
+            });
+        });
+
+        // Fading 
+
+        $(document).ready(function () {
+            $("#fadingIn").click(function () {
+                $("#div1").fadeIn();
+                $("#div2").fadeIn("slow");
+                $("#div3").fadeIn(5000);
+            });
+        });
+
+        $("#fadingOut").click(function () {
+            $("#div1").fadeOut();
+            $("#div2").fadeOut("slow");
+            $("#div3").fadeOut(3000);
+        });
+
+        $('#fading').click(() => {
+            $("#div3").fadeToggle(1000);
+        })
+
+        $(document).ready(function () {
+            $("#fade").click(function () {
+                $("#div1").fadeTo("slow", 0.15);
+                $("#div2").fadeTo("slow", 0.4);
+                $("#div3").fadeTo("slow", 0.7);
+            });
+        });
+
+
+        //ANIMATIONS
+
+        $(document).ready(function () {
+            $("#animtnBtn").click(function () {
+                $("#animation").animate({ left: '250px' });
+            });
+        });
+
+        $("#multiBtn2").click(function () {
+            $("#multiAnimation2").animate({
+                left: '250px',
+                opacity: '0.5',
+                height: '150px',
+                width: '150px'
+            },2000);
+            $("#multiAnimation2").animate({
+                left: '0px',
+                height: '100px',
+                width: '100px'
+            },2000);
+        });
+
+        $(document).ready(function () {
+            $("#multiBtn").click(function () {
+                $("#multiAnimation").animate({
+                    height: 'toggle'
+                });
+            });
+        });
+
+        $("#multiBtn1").click(function () {
+            var div = $("#multiAnimation1");
+            div.animate({ height: '300px', opacity: '0.4' }, "slow");
+            div.animate({ width: '300px', opacity: '0.8' }, "slow");
+            div.animate({ height: '100px', opacity: '0.4' }, "slow");
+            div.animate({ width: '100px', opacity: '0.8' }, "slow");
+            div.animate({ fontSize: '3em' }, "slow");
+        });
+
+        //Stop function
+
+        $(document).ready(function () {
+            $("#flip").click(function () {
+                $("#panel").slideDown(5000);
+            });
+            $("#stop").click(function () {
+                $("#panel").stop();
+            });
+        });
+
+
+
+
+    </script>
+
+</body>
+
+</html>

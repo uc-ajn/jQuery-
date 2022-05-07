@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Traversal</title>
+
+    <style>
+        .ancestors * {
+            display: block;
+            border: 2px solid lightgrey;
+            color: lightgrey;
+            padding: 5px;
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- JQuery Traversal
+    JQuery Traversal methods for the DOM tree: parent(yes),parents(yes)
+    ,parentUntil(yes), children(yes), find(yes), next(yes), siblings(yes),
+    filter(yes) -->
+
+    <div class="ancestors">
+        <div style="width:500px;">div (great-grandparent)
+            <ul>ul (grandparent)
+                <li>li (direct parent & sibling of li)
+                    <span class="span1">span(class="span1")</span>
+                    <span class="span1">span(class="span1")</span>
+                    <span>span</span>
+                    <span>span</span>
+                </li>
+                <li>li (direct parent & sibling of li)
+                    <div>div</div>
+                    <div>div</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <button id="parents">Apply to parents</button>
+    <button id="siblings">Apply to siblings</button>
+    <button id="next">Apply to next</button>
+    <button id="nextAll">Apply to nextAll</button>
+    <button id="filter">Apply to filter</button>
+
+
+    <div class="ancestors">
+        <div style="width:500px;">div (grandparent)
+            <p>p (direct parent)
+                <span id="span1">span</span>
+            </p>
+        </div>
+    </div>
+
+    <button id="parent">Apply to parent</button>
+
+    <div class="ancestors">
+        <ul>ul (grandparent)
+            <div style="width:500px;">div (great-grandparent)
+                <li>li (direct parent)
+                    <span id="span1">span</span>
+                    <span id="span1">span</span>
+                </li>
+        </ul>
+    </div>
+    </div>
+    <button id="parentsUntil">Apply to parentsUntil</button>
+    <button id="children">Apply to children</button>
+    <button id="find">Apply to find</button>
+
+    <script>
+        $(document).ready(function () {
+            $('#parents').click(function () {
+                $("li").parents().css({ "color": "red", "border": "2px solid red" });
+            });
+            $('#siblings').click(function () {
+                $("span").siblings("div").css({ "color": "red", "border": "2px solid red" });
+            });
+            $('#next').click(function () {
+                $("li").next().css({ "color": "red", "border": "2px solid red" });
+            });
+            $('#nextAll').click(function () {
+                $("span").nextAll().css({ "color": "red", "border": "2px solid red" });
+            });
+            $('#filter').click(function () {
+                $("span").filter('.span1').css({ "color": "red", "border": "2px solid red" });
+            });
+        });
+
+        $(document).ready(function () {
+            $('#parent').click(function () {
+                $("span").parent().css({ "color": "red", "border": "2px solid red" });
+
+            });
+        });
+
+        $(document).ready(function () {
+            $('#parentsUntil').click(function () {
+                $("span").parentsUntil("div").css({ "color": "red", "border": "2px solid red" });
+            });
+            $('#children').click(function () {
+                $("ul").children().css({ "color": "red", "border": "2px solid red" });
+            });
+            $('#find').click(function () {
+                $("li").find('span').css({ "color": "red", "border": "2px solid red" });
+            });
+        });
+
+    </script>
+</body>
+
+</html>

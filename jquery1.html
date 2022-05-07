@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>jQuery HTML(3)</title>
+
+    <style>
+        #heading {
+            text-align: center;
+        }
+
+        .box,
+        .container1 {
+            background: lightpink;
+            border: 1px solid black;
+            padding: 10px 20px;
+            width: 60%;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .palevioletred {
+            color: red;
+        }
+
+        .important {
+            font-weight: bold;
+            font-size: xx-large;
+        }
+
+        .blue {
+            color: yellowgreen;
+        }
+
+        #div1 {
+            height: 150px;
+            width: 300px;
+            padding: 10px;
+            margin: 3px;
+            border: 1px solid blue;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- JQuery HTML
+    1. Get/Set Content methods: html(yes), text(yes), val(yes)
+    2. Add new HTML content / Remove the added content: append(yes), prepend(yes), after(yes), before(yes) / remove(yes), empty(yes)
+    3. JQuery methods for the css manipulation: addClass(yes), removeClass(yes), toggleClass(yes), css(yes)
+    4. JQuery Dimensions methods: height(), width(), innerHeight(), innerWidth(), outerWidth(), outerHeight() -->
+
+    <!-- 1. text() - Sets or returns the text content of selected elements
+    html() - Sets or returns the content of selected elements (including HTML markup)
+    val() - Sets or returns the value of form fields -->
+
+    <h2 id="heading">jQuery Get Methods</h2>
+
+    <div class="box container" id="Box">
+        <h3>Test Box</h3>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt similique error, asperiores reiciendis,
+        <div class="child" style="background-color: white; height: 100px; padding: 5px;">
+            <p id="para1">
+                praesentium ipsum porro doloribus sunt cumque maxime voluptatem. Odio aperiam aspernatur numquam nulla
+                aut
+                in voluptatem hic placeat optio nesciunt, cum quos molestiae quam minima, eaque, porro ipsam! Aliquid
+                fugit
+                laudantium maxime consequuntur excepturi odit perferendis dolore?
+            </p>
+        </div>
+
+        <div class="child1" style="background-color: white; height: 100px;">
+            <p id="para2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi excepturi ullam commodi?</p>
+            <p id="para3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas, ea.</p>
+        </div>
+
+        <button id="remove">Remove</button>
+        <button id="empty">Empty</button>
+        <button id="addClass">Add class</button>
+        <button id="removeClass">Remove class</button>
+        <button id="toggle">Toggle class</button>
+        <button id="css">return CSS property</button>
+        <button id="css1">set CSS property</button>
+    </div>
+
+    <div class="button">
+        <button type="button" id="btn" value="submit button">click</button>
+    </div>
+
+    <p id="test1">This is a <b>bold</b> paragraph.</p>
+    <p id="test2">This is another <b>bold</b> paragraph.</p>
+
+    <button id="btn1">Show Old/New Text</button>
+    <button id="btn2">Show Old/New HTML</button>
+
+    <div class="container1">
+        <p id="para">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem eum eveniet error sequi, mollitia
+            consequuntur nihil soluta, nisi laudantium ducimus inventore non? Aspernatur natus, ad ipsa cumque placeat
+            nostrum possimus ab, animi quae similique earum culpa ducimus facilis libero corrupti minus porro accusamus!
+            Hic doloremque maxime iste deleniti quasi veritatis?
+        </p>
+
+        <button id="append">APPEND</button>
+        <button id="prepand">PREPAND</button>
+    </div>
+
+    <button id="appnedmulti" onclick="appendText()">Append text</button>
+    <div id="mutliappend">This is a paragraph.</div>
+
+
+    <img width="100" height="140"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrCNhAlP_lRq6JJqifMKGX8iTRI6Km83xfFBbSyx7mwUMBIG7M0J5bTYk-OSHoL0JlrYE&usqp=CAU"
+        alt="jQuery" width="100" height="140"><br><br>
+    <button id="btn3">Insert before</button>
+    <button id="btn4">Insert after</button><br><br>
+
+    <div id="div1"></div>
+    <button id="widthHeight">Display dimensions of div</button>
+    <script>
+        //  GET CONTENT METHODS
+
+        $(document).ready(function () {
+            console.log($('.container1').html());
+        });
+
+        $(document).ready(function () {
+            console.log($('.container1').text());
+        });
+        $(document).ready(function () {
+            console.log($('#btn').val());
+        });
+
+        $(document).ready(function () {
+                console.log($('#btn').attr('type'));
+            });
+
+
+        //SET CONTENT METHODS
+        $(document).ready(function () {
+            $('#btn').click(function () {
+                $('#Box h3').text("change text using set methods text();");
+                // $('#Box p').text("This text using set methods")
+                $('#Box p').html("This text using <strong>set methods</strong>")
+                $('#Box h3').attr("class", "palevioletred");
+            });
+        });
+
+        $(document).ready(function () {
+            $("#btn1").click(function () {
+                $("#test1").text(function (i, origText) {
+                    return "Old text: " + origText + " New text: Hello world! (index: " + i + ")";
+                });
+            });
+
+            $("#btn2").click(function () {
+                $("#test2").html(function (i, origText) {
+                    return "Old html: " + origText + " New html: Hello <b>world!</b> (index: " + i + ")";
+                });
+            });
+        });
+
+        // 2. Add new HTML content / Remove the added content: append(yes), prepend(yes), after(yes), before(yes) / remove(yes), empty(yes)
+
+        // APPEND & prepand
+
+        $(document).ready(function () {
+            $("#append").click(function () {
+                $('.container1').append("<h3>using append method add heading</h3>");
+            })
+        })
+
+        $(document).ready(function () {
+            $("#prepand").click(function () {
+                $('.container1').prepend("<h3>Using prepend method add heading</h3>");
+            })
+        })
+
+        function appendText() {
+            var txt1 = "<p>Text.</p>";        // Create text with HTML
+            var txt2 = $("<p></p>").text("Text.");  // Create text with jQuery
+            var txt3 = document.createElement("p");
+            txt3.innerHTML = "Text.";         // Create text with DOM
+            $("#mutliappend").append(txt1, txt2, txt3);   // Append new elements
+        }
+
+        //Before and After
+
+        $(document).ready(function () {
+            $("#btn3").click(function () {
+                $("img").before("<b>Before</b>");
+            });
+
+            $("#btn4").click(function () {
+                $("img").after("<i>After</i>");
+            });
+        });
+
+        // remove and empty
+        $(document).ready(function () {
+            $("#remove").click(function () {
+                $(".child").remove();
+            });
+
+            $("#empty").click(function () {
+                $(".child1").empty();
+            });
+        });
+
+        // 3. JQuery methods for the css manipulation: addClass(yes), removeClass(yes), toggleClass(yes), css(yes)
+        $(document).ready(function () {
+            $("#addClass").click(function () {
+                $("#para1").addClass("blue");
+            });
+
+            $("#removeClass").click(function () {
+                $("#para1").removeClass("blue");
+            });
+
+            $("#toggle").click(function () {
+                $("#para1").toggleClass("blue");
+            });
+
+            $("#css").click(function () {
+                alert("backgrounf color" + $('#para1').css("background-color"));
+            });
+
+            $("#css1").click(function () {
+                $('#para1').css({ "background-color": "yellow", "font-size": "70%" });
+            });
+        });
+
+        // 4. JQuery Dimensions methods: height(), width(), innerHeight(), innerWidth(), outerWidth(), outerHeight()-- >
+        $(document).ready(function () {
+            $("#widthHeight").click(function () {
+                var txt = "";
+                txt += "Width of div: " + $("#div1").width() + "</br>";
+                txt += "Height of div: " + $("#div1").height() + "</br>";
+                txt += "Inner width: " + $("#div1").innerWidth() + "</br>";
+                txt += "Inner height: " + $("#div1").innerHeight() + "</br>";
+                txt += "Outer width: " + $("#div1").outerWidth() + "</br>";
+                txt += "Outer height: " + $("#div1").outerHeight() + "<br>";
+                txt += "Outer width (+margin): " + $("#div1").outerWidth(true) + "</br>";
+                txt += "Outer height (+margin): " + $("#div1").outerHeight(true);
+                $("#div1").html(txt);
+            });
+        });
+    </script>
+</body>
+
+</html>
